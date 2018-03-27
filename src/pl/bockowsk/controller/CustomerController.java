@@ -6,9 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import pl.bockowsk.dao.CustomerDAO;
 import pl.bockowsk.entity.Customer;
 import pl.bockowsk.service.CustomerService;
 
@@ -33,5 +34,16 @@ public class CustomerController {
 		Customer customer=new Customer();
 		theModel.addAttribute("newCustomer", customer);
 		return "customer-form";
+	}
+	@PostMapping("/saveCustomer")
+	public String saveCustomer(@ModelAttribute("newCustomer") Customer customer) {
+		// pobieram obiekt z modelu, jak?
+		// anotacja @ModelAttirbute("newCustomer" w deklaracji metody)
+		customerService.saveCustomer(customer);
+		// save do db za pomoca Service -> DAO 
+		
+		// nie wiem co return?
+		// po prostu redirect na koncu do glownego, e.g. return "redirect:/customer/list";
+		return "redirect:/customer/list";
 	}
 }

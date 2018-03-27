@@ -22,10 +22,19 @@ public class CustomerDAOImpl implements CustomerDAO {
 	public List<Customer> getCustomers() {
 		// get a session from factory
 		Session session=sessionFactory.getCurrentSession();
-		String hql="from Customer";
+		String hql="FROM Customer ORDER BY last_name";
 		Query<Customer> query=session.createQuery(hql,Customer.class);
 		List<Customer> customers=query.getResultList();
 		return customers;
+	}
+
+	@Transactional
+	@Override
+	public void saveCustomer(Customer customer) {
+		// get a session from factory
+		Session session=sessionFactory.getCurrentSession();
+		session.save(customer);
+		
 	}
 
 }
