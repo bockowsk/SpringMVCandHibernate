@@ -23,13 +23,25 @@
 					<th>Fist Name</th>
 					<th>Last Name</th>
 					<th>Email</th>
+					<th>Action</th>
 				</tr>
 				<!-- loop over and print our customers -->
 				<c:forEach var="tempCustomer" items="${attributeCustomers}">
+					<!-- update link z customer id -->
+					<c:url var="updateLink" value="/customer/showFormForUpdate">
+						<c:param name="customerId" value="${tempCustomer.id}"/>
+					</c:url>
+					<!-- delete link z customer id -->
+					<c:url var="deleteLink" value="/customer/deleteCustomer">
+						<c:param name="customerId" value="${tempCustomer.id}"/>
+					</c:url>
+					
 					<tr>
 						<td>${tempCustomer.first_name}</td>
 						<td>${tempCustomer.last_name}</td>
 						<td>${tempCustomer.email}</td>
+						<td><a href="${updateLink}">Update</a></td>
+						<td><a href="${deleteLink}" onclick="if (!(confirm('are you sure you want to delete this customer?'))) return false">KASOWANIE</a></td>
 					</tr>
 				</c:forEach>
 			</table>

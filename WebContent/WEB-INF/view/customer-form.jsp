@@ -19,8 +19,9 @@
 		</div>
 		<div id="conatiner">
 			<h3>Save Customer</h3>
-			<form:form action="saveCustomer" modelAttribute="newCustomer"
-				method="POST">
+			<!--  track customera -->
+			<form:form action="saveCustomer" modelAttribute="newCustomer" method="POST">
+				<form:hidden path="id"/>
 				<table>
 					<tbody>
 							<tr><label>Fist Name</label></tr>
